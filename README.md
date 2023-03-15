@@ -26,7 +26,7 @@ Music playlist app created with React.js. Redux and Node.js using Express.js
   - [Overview](#overview)
     - [User Story](#user-story)
     - [Acceptance Criteria](#acceptance-criteria)
-    - [Design](#design)
+    - [UX/UI Design](#uxui-design)
     - [Links](#links)
     - [Built with](#built-with)
   - [Authors](#authors)
@@ -49,9 +49,9 @@ so I can create personalised playlists and group them into categories.
 - [ ] It's done when I can create personalised playlists and save them in bookmark categories.
 - [ ] It's done when I can play the preview of the tracks.
 
-### Design
+### UX/UI Design
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FeXby2cQnFCV7AkqxnbGxUV%2FBack2Life-Music-Playlist-App%3Fnode-id%3D0%253A1%26t%3DXzEg43EkCrMR1FMV-1" allowfullscreen></iframe>
+[Wireframes](https://www.figma.com/file/eXby2cQnFCV7AkqxnbGxUV/Back2Life-Music-Playlist-App?node-id=0%3A1&t=qkWeFJI4Uh06oPu3-1)
 
 ### Links
 
