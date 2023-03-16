@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Back2Life: Music Playlist App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Music playlist app created with React.js. Redux and Node.js using Express.js
 
-## Available Scripts
+<!-- project repository shields -->
+<p align="center">
+  <img src="https://img.shields.io/github/repo-size/technoveltyco/back2life-music-playlist-app" />
+  <img src="https://img.shields.io/github/languages/top/technoveltyco/back2life-music-playlist-app" />
+  <img src="https://img.shields.io/github/issues/technoveltyco/back2life-music-playlist-app" />
+  <img src="https://img.shields.io/github/last-commit/technoveltyco/back2life-music-playlist-app" />
+</p>
 
-In the project directory, you can run:
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-orange" />
+  <img src="https://img.shields.io/badge/CSS3-blue" />
+  <img src="https://img.shields.io/badge/TailwindCSS-purple" />
+  <img src="https://img.shields.io/badge/Javascript-yellow" />
+  <img src="https://img.shields.io/badge/Moment.js-green" />
+</p>
+<!-- end project repository shields -->
 
-### `npm start`
+## Table of contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Back2Life: Music Playlist App](#back2life-music-playlist-app)
+  - [Table of contents](#table-of-contents)
+  - [Overview](#overview)
+    - [User Story](#user-story)
+    - [Acceptance Criteria](#acceptance-criteria)
+    - [UX/UI Design](#uxui-design)
+    - [Links](#links)
+    - [Built with](#built-with)
+  - [Authors](#authors)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Overview
 
-### `npm test`
+Back2Life is an music playlist app developed in React.js that allows you to search and create personalised playlists using  Shazam music database.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### User Story
 
-### `npm run build`
+As a Web App User,
+I want to look up songs, artists, albums and genres,
+so I can create personalised playlists and group them into categories.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Acceptance Criteria
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- [ ] It's done when I can search by songs, artists, albums and genres.
+- [ ] It's done when I can save songs, artists, albums and genres in favourites categories.
+- [ ] It's done when I can see the detailed info of songs, artists, and albums.
+- [ ] It's done when I can create personalised playlists and save them in bookmark categories.
+- [ ] It's done when I can play the preview of the tracks.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### UX/UI Design
 
-### `npm run eject`
+[Wireframes](https://www.figma.com/file/eXby2cQnFCV7AkqxnbGxUV/Back2Life-Music-Playlist-App?node-id=0%3A1&t=qkWeFJI4Uh06oPu3-1)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Links
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Solution URL: [https://github.com/technoveltyco/back2life-music-playlist-app](https://github.com/technoveltyco/back2life-music-playlist-app)
+- Live Site URL: [https://technoveltyco.github.io/back2life-music-playlist-app/](https://technoveltyco.github.io/back2life-music-playlist-app/) - **It's going to be deployed to Netifly later**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Built with
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- [React.js](https://reactjs.org/)
+- [React Redux](https://react-redux.js.org/)
+- [Tailwind.css](https://tailwindcss.com/)
+- [Express.js](https://expressjs.com/)
+- [Shazam API](https://rapidapi.com/apidojo/api/shazam/)
 
-## Learn More
+## Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  Group 19
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Oyewumi Afolabi
+- GitHub - [babycodeher](https://github.com/babycodeher)
 
-### Code Splitting
+Sumbal Khan
+- GitHub - [sumbal28](https://github.com/sumbal28)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Jozef Elias
+- GitHub - [ElanekJ](https://github.com/ElanekJ)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Daniel Rodriguez
+- GitHub - [technoveltyco](https://github.com/technoveltyco)
