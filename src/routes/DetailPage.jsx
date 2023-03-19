@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchSong } from "../../api/api.js";
-import Player from "../Player";
-import Playlist from "../Playlist";
+import { fetchSong } from "../api/api.js";
+import Player from "../components/Player.js";
+import Playlist from "../components/Playlist.js";
 import "./DetailPage.css";
 
 const songIdMock = "40333609"; // key attribute from shazam json song
