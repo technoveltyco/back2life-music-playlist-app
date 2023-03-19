@@ -1,65 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { fetchSong } from "../api/api.js";
+import { useEffect, useState } from "react";
 import "./Player.css";
 
-const songIdMock = "40333609"; // key attribute from shazam json song
-
-function Player({ songId = songIdMock }) {
-  const [song, setSong] = useState(false);
+function Player({ song, reset }) {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [currentTimer, setCurrentTimer] = useState(convertSecondsToTime(0));
   const [totalTimer, setTotalTimer] = useState(convertSecondsToTime(0));
 
   useEffect(() => {
-    const getSong = async () => {
-      const response = await fetchSong(songId);
-      const { key, title, subtitle, type, url, urlparams, images, hub } =
-        response;
+    // Audio and JavaScript handler for timig.
+    const audioElement = new Audio(song.uriplayer);
+    audioElement.addEventListener("loadeddata", () => {
+      setTotalTimer(convertSecondsToTime(audioElement.duration));
+    });
+    audioElement.addEventListener("timeupdate", () => {
+      setCurrentTimer(convertSecondsToTime(audioElement.currentTime));
+    });
+    audioElement.addEventListener("ended", () => {
+      setPlaying(false);
+      setCurrentTimer(convertSecondsToTime(0));
+    });
 
-      const uriplayer = hub.actions.reduce((uri, action) => {
-        if (Object.keys(action).includes("uri")) {
-          uri = action.uri;
-        }
+    setAudio(audioElement);
+  }, [song]);
 
-        return uri;
-      }, "");
+  useEffect(() => {
+    resetPlayer();
+  }, [reset]);
 
-      // Audio and JavaScript handler for timig.
-      const audioElement = new Audio(uriplayer);
-      audioElement.addEventListener("loadeddata", () => {
-        setTotalTimer(convertSecondsToTime(audioElement.duration));
-      });
-      audioElement.addEventListener("timeupdate", () => {
-        setCurrentTimer(convertSecondsToTime(audioElement.currentTime));
-      });
-      audioElement.addEventListener("ended", () => {
+  function resetPlayer() {
+    if (reset === true) {
+      if (playing) {
         setPlaying(false);
-        setCurrentTimer(convertSecondsToTime(0));
-      });
+      }
 
-      setSong({
-        id: key,
-        title: title,
-        subtitle: subtitle,
-        type: type,
-        url: url,
-        urlparams: urlparams,
-        images: {
-          background: images.background,
-          coverart: images.coverart,
-          coverarthq: images.coverarthq,
-        },
-        uriplayer: uriplayer,
-      });
-      setAudio(audioElement);
-    };
+      if (audio) {
+        audio.pause();
+        setAudio(null);
+      }
 
-    getSong();
-  }, [songId]);
+      setCurrentTimer(convertSecondsToTime(0));
+      setTotalTimer(convertSecondsToTime(0));
+    }
+  }
 
   // Event handlers.
-  function handlePlay(e) {
+  function handlePlay() {
     if (playing) {
       audio.pause();
     } else {
@@ -71,8 +57,6 @@ function Player({ songId = songIdMock }) {
   function convertSecondsToTime(seconds) {
     return new Date(seconds * 1000).toISOString().substring(11, 19);
   }
-
-  // console.log(songId, song, playing);
 
   return (
     <>
