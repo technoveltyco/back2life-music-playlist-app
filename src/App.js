@@ -1,13 +1,14 @@
-import CardsPage from './components/CardsPage';
-import DetailPage from "./components/pages/DetailPage";
+import Header from "./components/Header";
+import Main from "./components/Main";
+import Footer from "./components/Footer";
 import "./App.css";
-
 
 function App() {
   return (
     <div className="App">
-      <CardsPage/>
-      <DetailPage />
+      <Header />
+      <Main />
+      <Footer />
     </div>
   );
 }
