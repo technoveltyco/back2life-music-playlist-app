@@ -8,6 +8,10 @@ function Player({ song, reset }) {
   const [totalTimer, setTotalTimer] = useState(convertSecondsToTime(0));
 
   useEffect(() => {
+    if (reset) {
+      resetPlayer();
+    }
+
     // Audio and JavaScript handler for timig.
     const audioElement = new Audio(song.uriplayer);
     audioElement.addEventListener("loadeddata", () => {
@@ -22,26 +26,20 @@ function Player({ song, reset }) {
     });
 
     setAudio(audioElement);
-  }, [song]);
-
-  useEffect(() => {
-    resetPlayer();
-  }, [reset]);
+  }, [song, reset]);
 
   function resetPlayer() {
-    if (reset === true) {
-      if (playing) {
-        setPlaying(false);
-      }
-
-      if (audio) {
-        audio.pause();
-        setAudio(null);
-      }
-
-      setCurrentTimer(convertSecondsToTime(0));
-      setTotalTimer(convertSecondsToTime(0));
+    if (playing) {
+      setPlaying(false);
     }
+
+    if (audio) {
+      audio.pause();
+      setAudio(null);
+    }
+
+    setCurrentTimer(convertSecondsToTime(0));
+    setTotalTimer(convertSecondsToTime(0));
   }
 
   // Event handlers.
