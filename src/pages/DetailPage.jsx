@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchSong } from "../api/api.js";
+import { fetchSong } from "../components/api.js";
 import Player from "../components/Player.js";
 import Playlist from "../components/Playlist.js";
 import "./DetailPage.css";

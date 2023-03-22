@@ -1,8 +1,8 @@
 
 function SearchBar() {
     return (
-        <div className="flex items-center flex-row-reverse pt-3">
-            <div className="flex space-x-1 basis-1/2">
+        <div className="flex items-center flex-row-reverse pt-3 justify-center">
+            <div className="flex space-x-1 basis-3/4">
                 <input
                     type="text"
                     className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40 autocmplete='on' "
