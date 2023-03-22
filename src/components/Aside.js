@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTopTenTracks } from "../api/index.js";
 
-function Aside({ playlist, setPlaylist, setTrackToPlay, handleAddToPlaylist }) {
+function Aside({
+  playlist,
+  setPlaylist,
+  setTrackToPlay,
+  addToPlaylist,
+  removeFromPlaylist,
+}) {
   const [topTen, setTopTen] = useState([]);
 
   useEffect(() => {
@@ -12,7 +18,7 @@ function Aside({ playlist, setPlaylist, setTrackToPlay, handleAddToPlaylist }) {
     })();
   }, []);
 
-  const handlePlaylist = (track, e) => {
+  const handleGoToPlaylist = (track) => {
     setTrackToPlay(track);
     setPlaylist(playlist);
   };
@@ -25,15 +31,19 @@ function Aside({ playlist, setPlaylist, setTrackToPlay, handleAddToPlaylist }) {
           {topTen &&
             topTen.map((track) => {
               return (
-                <a
-                  key={track.id}
+                <Link
+                  to="/musicplayer"
                   className="flex justify-between hover:bg-red-100"
-                  href="#!"
+                  onClick={() => handleGoToPlaylist(track)}
                 >
                   {`${track.title} - ${track.subtitle}`}
                   <button
                     className="add-btn hover:bg-blue-100 text-red font-sm rounded"
-                    onClick={(e) => handleAddToPlaylist(track, e)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      addToPlaylist(track);
+                    }}
                   >
                     <svg
                       xmlns="https://icons.veryicon.com/png/o/miscellaneous/250-thick-line-icon-of-website-and-app/4-add-to-playlist.png"
@@ -50,7 +60,7 @@ function Aside({ playlist, setPlaylist, setTrackToPlay, handleAddToPlaylist }) {
                       />
                     </svg>
                   </button>
-                </a>
+                </Link>
               );
             })}
         </div>
@@ -65,22 +75,20 @@ function Aside({ playlist, setPlaylist, setTrackToPlay, handleAddToPlaylist }) {
                   </span>
                 );
               } else {
-                playlist.map((track) => {
+                return playlist.map((track) => {
                   return (
                     <li
                       key={track.id}
                       className="flex items-center justify-between py-2 px-4"
                     >
-                      <Link to="/musicplayer">
-                        <a
-                          className="flex justify-between hover:bg-red-100"
-                          href="#!"
-                          onClick={(e) => handlePlaylist(track)}
-                        >
-                          <span className="text-gray-800">
-                            {`${track.title} - ${track.subtitle}`}
-                          </span>
-                        </a>
+                      <Link
+                        to="/musicplayer"
+                        className="flex justify-between hover:bg-red-100"
+                        onClick={() => handleGoToPlaylist(track)}
+                      >
+                        <span className="text-gray-800">
+                          {`${track.title} - ${track.subtitle}`}
+                        </span>
                       </Link>
                     </li>
                   );

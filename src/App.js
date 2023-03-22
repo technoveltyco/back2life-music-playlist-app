@@ -14,17 +14,34 @@ function App() {
   const [playlist, setPlaylist] = useState([]); // User playlist.
 
   useEffect(() => {
-    const getDefaultPlaylist = async () => {
-      const tracksFetched = await fetchChartTracks();
-      setTracks(tracksFetched);
-    };
-
-    getDefaultPlaylist();
+    const savedPlaylist = JSON.parse(localStorage.getItem("playlist")) || false;
+    if (savedPlaylist) {
+      setTracks(savedPlaylist);
+      setTrackToPlay(savedPlaylist[0]);
+      setPlaylist(savedPlaylist);
+    } else {
+      (async () => {
+        const tracksFetched = await fetchChartTracks();
+        if (tracksFetched) {
+          setTracks(tracksFetched);
+          setTrackToPlay(tracksFetched[0]);
+        }
+      })();
+    }
   }, []);
 
-  const handleAddToPlaylist = (track, e) => {
-    e.preventDefault();
-    setPlaylist([...playlist, track]);
+  const addToPlaylist = (track) => {
+    const newPlaylist = [...playlist, track];
+    setPlaylist(newPlaylist);
+    localStorage.setItem("playlist", JSON.stringify(newPlaylist));
+  };
+
+  const removeFromPlaylist = (track) => {
+    const newPlaylist = playlist.filter(
+      (trackPlaylist) => trackPlaylist.id !== track.id
+    );
+    setPlaylist(newPlaylist);
+    localStorage.setItem("playlist", JSON.stringify(newPlaylist));
   };
 
   return (
@@ -41,7 +58,8 @@ function App() {
                 setTrackToPlay={setTrackToPlay}
                 playlist={playlist}
                 setPlaylist={setPlaylist}
-                handleAddToPlaylist={handleAddToPlaylist}
+                addToPlaylist={addToPlaylist}
+                removeFromPlaylist={removeFromPlaylist}
               />
             }
           />
@@ -50,9 +68,9 @@ function App() {
             element={
               <DetailPage
                 trackToPlay={trackToPlay}
-                setTrackToPlay={setTrackToPlay}
                 playlist={playlist}
-                handleAddToPlaylist={handleAddToPlaylist}
+                addToPlaylist={addToPlaylist}
+                removeFromPlaylist={removeFromPlaylist}
               />
             }
           />

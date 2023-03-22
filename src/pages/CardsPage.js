@@ -8,7 +8,8 @@ function CardsPage({
   setTrackToPlay,
   playlist,
   setPlaylist,
-  handleAddToPlaylist,
+  addToPlaylist,
+  removeFromPlaylist,
 }) {
   const [hits, setHits] = useState(tracks);
 
@@ -38,7 +39,8 @@ function CardsPage({
               setTrackToPlay={setTrackToPlay}
               playlist={playlist}
               setPlaylist={setPlaylist}
-              handleAddToPlaylist={handleAddToPlaylist}
+              addToPlaylist={addToPlaylist}
+              removeFromPlaylist={removeFromPlaylist}
             />
           </div>
           <div className="grid gap-4 lg:grid-cols-3 col-span-3">
