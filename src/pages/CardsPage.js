@@ -20,11 +20,12 @@ function CardsPage({
       artist: hit.subtitle,
       albumImage: hit.images.coverart,
       songURL: hit.uriplayer,
+      hit,
     };
   });
 
-  const handleCardBtn = (key) => {
-    setPlaylist(hits.filter((hit) => hit.id === key));
+  const handlePlaySong = (track) => {
+    setTrackToPlay(track);
   };
 
   return (
@@ -63,7 +64,7 @@ function CardsPage({
                     <Link to="/musicplayer">
                       <button
                         className="px-6 py-2 text-sm text-white bg-red-400 rounded shadow"
-                        onClick={(e) => handleCardBtn(item.id)}
+                        onClick={() => handlePlaySong(item.hit)}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

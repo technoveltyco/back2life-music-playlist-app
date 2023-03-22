@@ -15,12 +15,20 @@ function DetailPage({ trackToPlay, playlist, addToPlaylist, removeFromPlaylist }
     })(key);
   };
 
+  const handleFavourite = (track) => {
+    if (playlist.find((trackPlaylist) => trackPlaylist.id === track.id)) {
+      removeFromPlaylist(track);
+    } else {
+      addToPlaylist(track);
+    }
+  };
+
   return (
     <main className="Page Details-page">
       <h1>Details Page</h1>
 
       <div className="Left-content">
-        <Player song={song} reset={resetPlayer} addToPlaylist={addToPlaylist} removeFromPlaylist={removeFromPlaylist} />
+        <Player song={song} reset={resetPlayer} handleFavourite={handleFavourite} />
       </div>
 
       {playlist && (
