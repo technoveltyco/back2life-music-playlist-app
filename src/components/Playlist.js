@@ -1,16 +1,16 @@
 import "./Playlist.css";
 
-function Playlist({ tracks, onClick }) {
+function Playlist({ tracks, handleTrack }) {
   return (
     <>
-      {tracks && (
+      {tracks.length && (
         <ul className="Playlist font-bold text-xl mb-2">
           <div className="grid grid-cols-1 gap-4">
             {tracks.map((track) => {
               return (
                 <li key={track.id} className="Track">
                   <a
-                    onClick={(e) => onClick(track.id, e)}
+                    onClick={(e) => handleTrack(track.id, e)}
                     href={track.url}
                     target="_blank"
                     rel="noreferrer"

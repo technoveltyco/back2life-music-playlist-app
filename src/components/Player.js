@@ -8,6 +8,10 @@ function Player({ song, reset }) {
   const [totalTimer, setTotalTimer] = useState(convertSecondsToTime(0));
 
   useEffect(() => {
+    if (!song) {
+      return;
+    }
+    
     if (reset) {
       resetPlayer();
     }
