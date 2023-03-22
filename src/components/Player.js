@@ -125,16 +125,19 @@ function Player({ song, reset }) {
                       <div
                         id="PlayHandlerBtn"
                         onClick={() => handlePlay()}
-                        className="Player-playhandler-btn text-white p-8 rounded-full bg-red-light shadow-lg"
+                        className="Player-playhandler-btn text-gray-darker p-8 rounded-full bg-red-light shadow-lg"
                       >
-                        <svg
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
+                        </svg>
+                        {/* <svg
                           className="w-8 h-8"
                           fill="currentColor"
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
                         >
                           <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z" />
-                        </svg>
+                        </svg> */}
                       </div>
                       <div className="text-grey-darker">
                         <svg

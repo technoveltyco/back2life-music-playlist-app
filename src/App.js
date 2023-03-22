@@ -1,15 +1,48 @@
-import Header from "./components/header/Header";
-import Main from "./components/Main";
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchChartTracks } from "./api/api.js";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
-import "./App.css";
+// import Search from './components/SearchBar';
+// import Player from './components/Player';
+// import Chart from './components/Aside';
+import LandingPage from "./pages/LandingPage";
+import CardsPage from "./pages/CardsPage";
+import DetailPage from "./pages/DetailPage";
 
 function App() {
+  const [tracks, setTracks] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
+
+  useEffect(() => {
+    const getDefaultPlaylist = async () => {
+      const tracksFetched = await fetchChartTracks();
+      setTracks(tracksFetched);
+      setPlaylist(tracksFetched);
+    };
+
+    getDefaultPlaylist();
+  }, []);
+
   return (
-    <div className="App">
-      <Header />
-      <Main />
-      <Footer />
-    </div>
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route
+            path="/results/*"
+            element={<CardsPage tracks={tracks} setPlaylist={setPlaylist} />}
+          />
+          <Route
+            path="/musicplayer"
+            element={<DetailPage playlist={playlist} />}
+          />
+        </Routes>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
