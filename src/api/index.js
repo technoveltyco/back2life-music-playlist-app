@@ -74,6 +74,36 @@ const fetchSong = async (key) => {
   return await {};
 };
 
+const fetchTopTenTracks = async () => {
+  const cached = getCachedResponse("fetchTopTenTracks");
+  if (cached) {
+    return cached;
+  }
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "cdcf75c0acmsh44586b63454a754p1809d3jsn141122f9a0da",
+      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+    },
+  };
+
+  return await fetch(
+    "https://shazam.p.rapidapi.com/charts/track?locale=en-GB&listId=genre-global-chart-12&pageSize=10&startFrom=0",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      const mappedResponse = response.tracks.map((track) => songMapping(track));
+      sessionStorage.setItem(
+        "fetchTopTenTracks",
+        JSON.stringify(mappedResponse)
+      );
+      return mappedResponse;
+    })
+    .catch((err) => console.error(err));
+};
+
 const fetchChartTracks = async () => {
   const cached = getCachedResponse("fetchChartTracks");
   if (cached) {
@@ -137,4 +167,4 @@ const fetchSearch = async (term) => {
     .catch((err) => console.error(err));
 };
 
-export { fetchSongs, fetchSong, fetchSearch, fetchChartTracks };
+export { fetchSongs, fetchSong, fetchSearch, fetchChartTracks, fetchTopTenTracks };

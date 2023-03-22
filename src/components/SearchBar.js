@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchSearch, fetchChartTracks } from "../api/api";
+import { fetchSearch, fetchChartTracks } from "../api";
 
 function SearchBar({ setSongs }) {
   const [keywords, setKeywords] = useState("");

@@ -3,8 +3,8 @@ import Player from "../components/Player.js";
 import Playlist from "../components/Playlist.js";
 import "./DetailPage.css";
 
-function DetailPage({ playlist }) {
-  const [song, setSong] = useState(false);
+function DetailPage({ trackToPlay, playlist }) {
+  const [song, setSong] = useState(trackToPlay);
   const [resetPlayer, setResetPlayer] = useState(false);
 
   const getSong = async (key) => {
@@ -17,8 +17,7 @@ function DetailPage({ playlist }) {
     setSong(track);
   }, [playlist]);
 
-  const handleTrack = (key, e) => {
-    e.preventDefault();
+  const handleTrack = (key) => {
     setResetPlayer(true);
     getSong(key);
 
@@ -39,7 +38,7 @@ function DetailPage({ playlist }) {
               <h2 className="font-bold text-xl mb-2">Tracks</h2>
               <Playlist
                 tracks={playlist}
-                handleTrack={(id, e) => handleTrack(id, e)}
+                handleTrack={(id) => handleTrack(id)}
               />
             </div>
           </aside>
