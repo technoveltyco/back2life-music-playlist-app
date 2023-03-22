@@ -4,13 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 // Depending on the current path, this component sets the "active" class on the appropriate navigation link item
 function Navbar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light ">
-            <Link className="navbar-brand" to="/">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light sm:ml-6 sm:block">
+            <Link className="navbar-brand text-lg hover:bg-red-300 rounded-md px-3 py-2" to="/">
                 Home
             </Link>
             <div>
-                <ul className="nav-list navbar-nav flex flex-row space-x-10 pl-10">
-                    <li className="nav-item">
+                <ul className="nav-list navbar-nav flex flex-row space-x-8 pl-10">
+                    <li className="nav-item text-lg hover:bg-red-300 rounded-md px-3 py-2">
                         <NavLink
                             to="/results"
                             className={({ isActive }) =>
@@ -21,7 +21,7 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <li className="nav-item ">
+                    <li className="nav-item text-lg hover:bg-red-300 rounded-md px-3 py-2">
                         <NavLink
                             to="/musicplayer"
                             end
@@ -33,7 +33,7 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item text-lg hover:bg-red-300 rounded-md px-3 py-2">
                         <NavLink
                             to="/results/chart"
                             className={({ isActive }) =>
@@ -44,7 +44,7 @@ function Navbar() {
                         </NavLink>
                     </li>
                     
-                    <li className="nav-item">
+                    <li className="nav-item text-lg hover:bg-red-300 rounded-md px-3 py-2">
                         <NavLink
                             to="/results/playlist"
                             className={({ isActive }) =>
@@ -55,7 +55,7 @@ function Navbar() {
                         </NavLink>
                     </li>
 
-                    <li className="nav-item">
+                    <li className="nav-item text-lg hover:bg-red-300 rounded-md px-3 py-2">
                         <NavLink
                             to="/results/search"
                             className={({ isActive }) =>
