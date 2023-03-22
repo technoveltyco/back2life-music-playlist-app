@@ -23,10 +23,22 @@ const songMapping = (shazamSong) => {
   };
 };
 
+const getCachedResponse = (cacheId) => {
+  return sessionStorage.getItem(cacheId)
+    ? JSON.parse(sessionStorage.getItem(cacheId))
+    : false;
+};
+
 const fetchSongs = async () => {
+  const cached = getCachedResponse(`fetchSongs`);
+  if (cached) {
+    return cached;
+  }
+
   const { tracks } = shazamSongs;
   const response = tracks.hits.map((hit) => {
     const songMapped = songMapping(hit.track);
+    sessionStorage.setItem(`fetchSongs`, JSON.stringify(songMapped));
     return songMapped;
   });
   return await response;
@@ -34,6 +46,11 @@ const fetchSongs = async () => {
 
 const fetchSong = async (id) => {
   if (id) {
+    const cached = getCachedResponse(`fetchSong(${id})`);
+    if (cached) {
+      return cached;
+    }
+
     const { tracks } = shazamSongs;
     const response = tracks.hits
       .filter((hit) => {
@@ -41,6 +58,7 @@ const fetchSong = async (id) => {
       })
       .map((hit) => {
         const songMapped = songMapping(hit.track);
+        sessionStorage.setItem(`fetchSong(${id})`, JSON.stringify(songMapped));
         return songMapped;
       });
 
@@ -49,4 +67,67 @@ const fetchSong = async (id) => {
   return await {};
 };
 
-export { fetchSongs, fetchSong };
+const fetchChartTracks = async () => {
+  const cached = getCachedResponse("fetchChartTracks");
+  if (cached) {
+    return cached;
+  }
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "cdcf75c0acmsh44586b63454a754p1809d3jsn141122f9a0da",
+      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+    },
+  };
+
+  return await fetch(
+    "https://shazam.p.rapidapi.com/charts/track?locale=en-GB&listId=ip-country-chart-GB&pageSize=6&startFrom=0",
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      const mappedResponse = response.tracks.map((track) => songMapping(track));
+      sessionStorage.setItem(
+        "fetchChartTracks",
+        JSON.stringify(mappedResponse)
+      );
+      return mappedResponse;
+    })
+    .catch((err) => console.error(err));
+};
+
+const fetchSearch = async (term) => {
+  const qsTerm = encodeURIComponent(term);
+  const cached = getCachedResponse(`fetchSearch(${qsTerm})`);
+  if (cached) {
+    return cached;
+  }
+
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "cdcf75c0acmsh44586b63454a754p1809d3jsn141122f9a0da",
+      "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+    },
+  };
+
+  return await fetch(
+    `https://shazam.p.rapidapi.com/search?term=${qsTerm}&locale=en-US&offset=0&limit=6`,
+    options
+  )
+    .then((response) => response.json())
+    .then((response) => {
+      const mappedResponse = response.tracks.hits.map((hit) =>
+        songMapping(hit.track)
+      );
+      sessionStorage.setItem(
+        `fetchSearch(${qsTerm})`,
+        JSON.stringify(mappedResponse)
+      );
+      return mappedResponse;
+    })
+    .catch((err) => console.error(err));
+};
+
+export { fetchSongs, fetchSong, fetchSearch, fetchChartTracks };

@@ -15,6 +15,8 @@ function DetailPage({ songId = songIdMock, playlist = false }) {
     setSong(songFetched);
   };
 
+  console.log(playlist);
+
   useEffect(() => {
     getSong(songId);
   }, [songId]);

@@ -3,7 +3,7 @@ import "./Playlist.css";
 function Playlist({ tracks, onClick }) {
   return (
     <>
-      {tracks && (
+      {tracks.length && (
         <ul className="Playlist font-bold text-xl mb-2">
           <div className="grid grid-cols-1 gap-4">
             {tracks.map((track) => {

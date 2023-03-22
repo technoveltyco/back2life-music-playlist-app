@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // import router from "../routes";
 import { useDispatch } from "react-redux";
 import { addPlaylist } from "../store/playlistSlice";
-import { fetchSongs } from "../api/api.js";
+import { fetchChartTracks } from "../api/api.js";
 import CardsPage from "../routes/CardsPage";
 import DetailPage from "../routes/DetailPage";
 
@@ -15,7 +15,7 @@ export default function Main() {
 
   useEffect(() => {
     const getPlaylist = async () => {
-      const songsFetched = await fetchSongs();
+      const songsFetched = await fetchChartTracks();
       setHits(songsFetched);
       setPlaylist(songsFetched);
     };

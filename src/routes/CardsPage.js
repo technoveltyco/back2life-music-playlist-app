@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchBar from "../components/SearchBar";
 import Aside from "../components/Aside";
 
@@ -71,7 +71,9 @@ import Aside from "../components/Aside";
 //   },
 // ];
 
-function CardsPage({ hits }) {
+function CardsPage() {
+  const [hits, setHits] = useState([]);
+
   const cards = hits.map((hit) => {
     return {
       title: hit.title,
@@ -88,10 +90,10 @@ function CardsPage({ hits }) {
   return (
     <div>
       <div className="container mx-auto">
-        <SearchBar />
+        <SearchBar setSongs={setHits} />
       </div>
       <div className="page-container p-6">
-        <div className="grid  lg:grid-cols-4">
+        <div className="grid lg:grid-cols-4">
           <div className="place-content-start">
             <Aside />
           </div>
