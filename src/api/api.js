@@ -44,25 +44,32 @@ const fetchSongs = async () => {
   return await response;
 };
 
-const fetchSong = async (id) => {
-  if (id) {
-    const cached = getCachedResponse(`fetchSong(${id})`);
+const fetchSong = async (key) => {
+  if (key) {
+    const cached = getCachedResponse(`fetchSong(${key})`);
     if (cached) {
       return cached;
     }
 
-    const { tracks } = shazamSongs;
-    const response = tracks.hits
-      .filter((hit) => {
-        return hit.track.key === id;
-      })
-      .map((hit) => {
-        const songMapped = songMapping(hit.track);
-        sessionStorage.setItem(`fetchSong(${id})`, JSON.stringify(songMapped));
-        return songMapped;
-      });
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "cdcf75c0acmsh44586b63454a754p1809d3jsn141122f9a0da",
+        "X-RapidAPI-Host": "shazam.p.rapidapi.com",
+      },
+    };
 
-    return await response[0];
+    return fetch(
+      `https://shazam.p.rapidapi.com/songs/get-details?key=${key}&locale=en-US`,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        const songMapped = songMapping(response);
+        sessionStorage.setItem(`fetchSong(${key})`, JSON.stringify(songMapped));
+        return songMapped;
+      })
+      .catch((err) => console.error(err));
   }
   return await {};
 };

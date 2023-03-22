@@ -71,11 +71,12 @@ import Aside from "../components/Aside";
 //   },
 // ];
 
-function CardsPage() {
-  const [hits, setHits] = useState([]);
+function CardsPage({ tracks, setPlaylist }) {
+  const [hits, setHits] = useState(tracks);
 
   const cards = hits.map((hit) => {
     return {
+      id: hit.id,
       title: hit.title,
       artist: hit.subtitle,
       albumImage: hit.images.coverart,
@@ -86,6 +87,11 @@ function CardsPage() {
       songURL: hit.uriplayer,
     };
   });
+
+  const handleCardBtn = (key, e) => {
+    e.preventDefault();
+    setPlaylist(hits.filter((hit) => hit.id === key));
+  };
 
   return (
     <div>
@@ -99,22 +105,25 @@ function CardsPage() {
           </div>
           <div className="grid gap-4 lg:grid-cols-3 col-span-3">
             {cards &&
-              cards.map((items) => (
+              cards.map((item) => (
                 <div
-                  key={items.id}
+                  key={item.id}
                   className="w-full rounded-lg shadow hover:shadow-xl lg:max-w-sm"
                 >
                   <img
                     className="object-cover w-full h-48"
-                    src={items.albumImage}
+                    src={item.albumImage}
                     alt="cover album"
                   />
                   <div className="p-4">
                     <h4 className="text-xl font-semibold text-blue-600">
-                      {items.title} - {items.artist}
+                      {item.title} - {item.artist}
                     </h4>
-                    <p className="mb-2 leading-normal">{items.genre}</p>
-                    <button className="px-6 py-2 text-sm text-white bg-red-400 rounded shadow">
+                    <p className="mb-2 leading-normal">{item.genre}</p>
+                    <button
+                      className="px-6 py-2 text-sm text-white bg-red-400 rounded shadow"
+                      onClick={(e) => handleCardBtn(item.id, e)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

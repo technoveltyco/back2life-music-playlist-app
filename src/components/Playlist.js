@@ -1,6 +1,6 @@
 import "./Playlist.css";
 
-function Playlist({ tracks, onClick }) {
+function Playlist({ tracks, handleTrack }) {
   return (
     <>
       {tracks.length && (
@@ -10,7 +10,7 @@ function Playlist({ tracks, onClick }) {
               return (
                 <li key={track.id} className="Track">
                   <a
-                    onClick={(e) => onClick(track.id, e)}
+                    onClick={(e) => handleTrack(track.id, e)}
                     href={track.url}
                     target="_blank"
                     rel="noreferrer"

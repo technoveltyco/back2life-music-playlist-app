@@ -7,27 +7,28 @@ import { fetchChartTracks } from "../api/api.js";
 import CardsPage from "../routes/CardsPage";
 import DetailPage from "../routes/DetailPage";
 
+// const songIdMock = "40333609"; // key attribute from shazam json song
 export default function Main() {
   const dispatch = useDispatch();
 
-  const [hits, setHits] = useState([]);
+  const [tracks, setTracks] = useState([]);
   const [playlist, setPlaylist] = useState([]);
 
   useEffect(() => {
-    const getPlaylist = async () => {
-      const songsFetched = await fetchChartTracks();
-      setHits(songsFetched);
-      setPlaylist(songsFetched);
+    const getDefaultPlaylist = async () => {
+      const tracksFetched = await fetchChartTracks();
+      setTracks(tracksFetched);
+      setPlaylist(tracksFetched);
     };
 
-    getPlaylist();
+    getDefaultPlaylist();
   }, []);
 
   return (
     <div className="Content bg-white">
       {/* <RouterProvider router={router} /> */}
 
-      <CardsPage hits={hits} />
+      <CardsPage tracks={tracks} setPlaylist={setPlaylist} />
       <DetailPage playlist={playlist} />
     </div>
   );

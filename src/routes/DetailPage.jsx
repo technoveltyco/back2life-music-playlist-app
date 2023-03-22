@@ -1,30 +1,27 @@
 import { useEffect, useState } from "react";
-import { fetchSong } from "../api/api.js";
 import Player from "../components/Player.js";
 import Playlist from "../components/Playlist.js";
 import "./DetailPage.css";
 
-const songIdMock = "40333609"; // key attribute from shazam json song
-
-function DetailPage({ songId = songIdMock, playlist = false }) {
+function DetailPage({ playlist }) {
   const [song, setSong] = useState(false);
   const [resetPlayer, setResetPlayer] = useState(false);
 
-  const getSong = async (songId) => {
-    const songFetched = await fetchSong(songId);
-    setSong(songFetched);
+  const getSong = async (key) => {
+    const tracksFiltered = playlist.filter((track) => track.id === key);
+    setSong(tracksFiltered[0]);
   };
 
-  console.log(playlist);
-
   useEffect(() => {
-    getSong(songId);
-  }, [songId]);
+    const track = playlist[0];
+    setSong(track);
+  }, [playlist]);
 
-  const handleTrack = (songId, e) => {
+  const handleTrack = (key, e) => {
     e.preventDefault();
-    getSong(songId);
     setResetPlayer(true);
+    getSong(key);
+
   };
 
   return (
@@ -42,7 +39,7 @@ function DetailPage({ songId = songIdMock, playlist = false }) {
               <h2 className="font-bold text-xl mb-2">Tracks</h2>
               <Playlist
                 tracks={playlist}
-                onClick={(id, e) => handleTrack(id, e)}
+                handleTrack={(id, e) => handleTrack(id, e)}
               />
             </div>
           </aside>
