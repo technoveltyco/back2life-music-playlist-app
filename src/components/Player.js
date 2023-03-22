@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Player.css";
 
-function Player({ song, reset }) {
+function Player({ song, reset, handleFavourite }) {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [currentTimer, setCurrentTimer] = useState(convertSecondsToTime(0));
@@ -11,7 +11,7 @@ function Player({ song, reset }) {
     if (!song) {
       return;
     }
-    
+
     if (reset) {
       resetPlayer();
     }
@@ -90,7 +90,11 @@ function Player({ song, reset }) {
                           {song.subtitle}
                         </p>
                       </div>
-                      <div className="text-red-lighter">
+                      <div
+                        id="Favourite-btn"
+                        className="Favourite text-red-lighter"
+                        onClick={() => handleFavourite(song)}
+                      >
                         <svg
                           className="w-6 h-6"
                           fill="currentColor"
@@ -127,8 +131,19 @@ function Player({ song, reset }) {
                         onClick={() => handlePlay()}
                         className="Player-playhandler-btn text-gray-darker p-8 rounded-full bg-red-light shadow-lg"
                       >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z" />
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          className="w-10 h-10"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z"
+                          />
                         </svg>
                         {/* <svg
                           className="w-8 h-8"

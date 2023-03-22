@@ -1,27 +1,26 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Player from "../components/Player.js";
 import Playlist from "../components/Playlist.js";
 import "./DetailPage.css";
 
-function DetailPage({ playlist }) {
-  const [song, setSong] = useState(false);
+function DetailPage({ trackToPlay, playlist, addToPlaylist, removeFromPlaylist }) {
+  const [song, setSong] = useState(trackToPlay);
   const [resetPlayer, setResetPlayer] = useState(false);
 
-  const getSong = async (key) => {
-    const tracksFiltered = playlist.filter((track) => track.id === key);
-    setSong(tracksFiltered[0]);
+  const handleTrack = (key) => {
+    setResetPlayer(true);
+    (async (key) => {
+      const tracksFiltered = playlist.filter((track) => track.id === key);
+      setSong(tracksFiltered[0]);
+    })(key);
   };
 
-  useEffect(() => {
-    const track = playlist[0];
-    setSong(track);
-  }, [playlist]);
-
-  const handleTrack = (key, e) => {
-    e.preventDefault();
-    setResetPlayer(true);
-    getSong(key);
-
+  const handleFavourite = (track) => {
+    if (playlist.find((trackPlaylist) => trackPlaylist.id === track.id)) {
+      removeFromPlaylist(track);
+    } else {
+      addToPlaylist(track);
+    }
   };
 
   return (
@@ -29,7 +28,7 @@ function DetailPage({ playlist }) {
       <h1>Details Page</h1>
 
       <div className="Left-content">
-        <Player song={song} reset={resetPlayer} />
+        <Player song={song} reset={resetPlayer} handleFavourite={handleFavourite} />
       </div>
 
       {playlist && (
@@ -39,7 +38,7 @@ function DetailPage({ playlist }) {
               <h2 className="font-bold text-xl mb-2">Tracks</h2>
               <Playlist
                 tracks={playlist}
-                handleTrack={(id, e) => handleTrack(id, e)}
+                handleTrack={(id) => handleTrack(id)}
               />
             </div>
           </aside>

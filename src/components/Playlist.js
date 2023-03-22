@@ -10,7 +10,10 @@ function Playlist({ tracks, handleTrack }) {
               return (
                 <li key={track.id} className="Track">
                   <a
-                    onClick={(e) => handleTrack(track.id, e)}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleTrack(track.id);
+                    }}
                     href={track.url}
                     target="_blank"
                     rel="noreferrer"
