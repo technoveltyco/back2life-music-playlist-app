@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/back2life-music-playlist-app/static/css/main.560170c5.css",
-    "main.js": "/back2life-music-playlist-app/static/js/main.1a8340a6.js",
+    "main.css": "/back2life-music-playlist-app/static/css/main.0b602df4.css",
+    "main.js": "/back2life-music-playlist-app/static/js/main.ded7a66d.js",
     "static/js/787.9fc2b1ac.chunk.js": "/back2life-music-playlist-app/static/js/787.9fc2b1ac.chunk.js",
     "index.html": "/back2life-music-playlist-app/index.html",
-    "main.560170c5.css.map": "/back2life-music-playlist-app/static/css/main.560170c5.css.map",
-    "main.1a8340a6.js.map": "/back2life-music-playlist-app/static/js/main.1a8340a6.js.map",
+    "main.0b602df4.css.map": "/back2life-music-playlist-app/static/css/main.0b602df4.css.map",
+    "main.ded7a66d.js.map": "/back2life-music-playlist-app/static/js/main.ded7a66d.js.map",
     "787.9fc2b1ac.chunk.js.map": "/back2life-music-playlist-app/static/js/787.9fc2b1ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.560170c5.css",
-    "static/js/main.1a8340a6.js"
+    "static/css/main.0b602df4.css",
+    "static/js/main.ded7a66d.js"
   ]
 }
