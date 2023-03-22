@@ -1,4 +1,4 @@
-import shazamSongs from "./mocks/shazam-search.json";
+import shazamSongs from "../api/mocks/shazam-search.json";
 // import shazamSong from "./mocks/shazam-song.json";
 
 const songMapping = (shazamSong) => {
