@@ -56,7 +56,7 @@ so I can create personalised playlists and group them into categories.
 ### Links
 
 - Solution URL: [https://github.com/technoveltyco/back2life-music-playlist-app](https://github.com/technoveltyco/back2life-music-playlist-app)
-- Live Site URL: [https://technoveltyco.github.io/back2life-music-playlist-app/](https://technoveltyco.github.io/back2life-music-playlist-app/) - **It's going to be deployed to Netifly later**
+- Live Site URL: [https://back2life.netlify.app/](https://back2life.netlify.app/) - **It's going to be deployed to Netifly later**
 
 ### Built with
 
