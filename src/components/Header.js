@@ -39,7 +39,9 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src={"https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"}
+                    src={
+                      "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    }
                     alt="Back2Life"
                   />
                   <img
@@ -49,9 +51,9 @@ export default function Header() {
                   />
                 </div>
                 {/* <div className="hidden sm:ml-6 sm:block"> */}
-                  {/* <div className="flex space-x-4"> */}
-                   <Navbar/>
-                    {/* {navigation.map((item) => (
+                {/* <div className="flex space-x-4"> */}
+                <Navbar />
+                {/* {navigation.map((item) => (
                       <a
                         key={item.name}
                         href={item.href}
@@ -66,11 +68,11 @@ export default function Header() {
                         {item.name}
                       </a>
                     ))} */}
-                  {/* </div> */}
+                {/* </div> */}
                 {/* </div> */}
               </div>
               {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"> */}
-                {/* <button
+              {/* <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                 >
@@ -78,9 +80,9 @@ export default function Header() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button> */}
 
-                {/* Profile dropdown */}
-                {/* <Menu as="div" className="relative ml-3"> */}
-                  {/* <div>
+              {/* Profile dropdown */}
+              {/* <Menu as="div" className="relative ml-3"> */}
+              {/* <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
                       <img
@@ -90,7 +92,7 @@ export default function Header() {
                       />
                     </Menu.Button>
                   </div> */}
-                  {/* <Transition
+              {/* <Transition
                     as={Fragment}
                     enter="transition ease-out duration-100"
                     enterFrom="transform opacity-0 scale-95"
@@ -99,8 +101,8 @@ export default function Header() {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   > */}
-                    {/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"> */}
-                      {/* <Menu.Item>
+              {/* <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"> */}
+              {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#!"
@@ -113,7 +115,7 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item> */}
-                      {/* <Menu.Item>
+              {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#!"
@@ -126,7 +128,7 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item> */}
-                      {/* <Menu.Item>
+              {/* <Menu.Item>
                         {({ active }) => (
                           <a
                             href="#!"
@@ -139,9 +141,9 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item> */}
-                    {/* </Menu.Items> */}
-                  {/* </Transition> */}
-                {/* </Menu> */}
+              {/* </Menu.Items> */}
+              {/* </Transition> */}
+              {/* </Menu> */}
               {/* </div> */}
             </div>
           </div>
