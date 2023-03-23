@@ -13,14 +13,14 @@ function SearchBar({ setSongs }) {
   }, []);
 
   // Event handlers.
-  const handleSearchBox = (e) => {
-    const searchTerm = e.target.value;
+  const handleSearchBox = () => {
+    const searchTerm = ref.current.value;
     if (searchTerm.length >= 3) {
       setKeywords(searchTerm);
     }
   };
 
-  const handleSearch = async (e) => {
+  const handleSearch = async () => {
     const term = keywords;
     const songs = await fetchSearch(term);
     setSongs(songs);
@@ -32,14 +32,14 @@ function SearchBar({ setSongs }) {
       <div className="flex space-x-1 basis-3/4">
         <input
           type="text"
-          className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40 autocmplete='on' "
+          className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40 autocmplete='on'"
           placeholder="What's your flavour..."
-          onChange={(e) => handleSearchBox(e)}
+          onChange={() => handleSearchBox()}
           ref={ref}
         />
         <button
           className="px-4 text-white bg-red-400 rounded-full "
-          onClick={(e) => handleSearch(e)}
+          onClick={() => handleSearch()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg "
