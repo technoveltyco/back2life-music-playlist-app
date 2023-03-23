@@ -1,11 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "./Player.css";
+import { PlaylistContext } from "../App";
 
 function Player({ song, reset, handleFavourite }) {
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [currentTimer, setCurrentTimer] = useState(convertSecondsToTime(0));
   const [totalTimer, setTotalTimer] = useState(convertSecondsToTime(0));
+
+  const { trackToPlay } = useContext(PlaylistContext);
+  if (!song) {
+    song = trackToPlay;
+  }
 
   useEffect(() => {
     if (!song) {
