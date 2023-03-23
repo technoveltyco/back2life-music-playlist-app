@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { fetchSearch, fetchChartTracks } from "../api";
 
 function SearchBar({ setSongs }) {
   const [keywords, setKeywords] = useState("");
+  const ref = useRef(null);
 
   useEffect(() => {
     (async () => {
@@ -19,11 +20,11 @@ function SearchBar({ setSongs }) {
     }
   };
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
     const term = keywords;
-    setKeywords("");
     const songs = await fetchSearch(term);
     setSongs(songs);
+    ref.current.value = "";
   };
 
   return (
@@ -34,10 +35,11 @@ function SearchBar({ setSongs }) {
           className="block w-full px-4 py-2 text-black-700 bg-white border rounded-full focus:border-red-400 focus:ring-red-300 focus:outline-none focus:ring focus:ring-opacity-40 autocmplete='on' "
           placeholder="What's your flavour..."
           onChange={(e) => handleSearchBox(e)}
+          ref={ref}
         />
         <button
           className="px-4 text-white bg-red-400 rounded-full "
-          onClick={(e) => handleSearch()}
+          onClick={(e) => handleSearch(e)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg "

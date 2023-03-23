@@ -1,0 +1,29 @@
+[[redirects]]
+  from = "/results"
+  to = "/results"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/musicplayer"
+  to = "/musicplayer"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/results/chart"
+  to = "/results/chart"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/results/playlist"
+  to = "/results/playlist"
+  status = 301
+  force = false
+
+[[redirects]]
+  from = "/results/search"
+  to = "/results/search"
+  status = 301
+  force = false
