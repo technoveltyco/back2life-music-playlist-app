@@ -17,7 +17,8 @@ function App() {
 
   useEffect(() => {
     const savedPlaylist = JSON.parse(localStorage.getItem("playlist")) || false;
-    if (savedPlaylist) {
+
+    if (savedPlaylist && savedPlaylist.length) {
       setTracks(savedPlaylist);
       setTrackToPlay(savedPlaylist[0]);
       setPlaylist(savedPlaylist);
@@ -46,6 +47,44 @@ function App() {
     localStorage.setItem("playlist", JSON.stringify(newPlaylist));
   };
 
+  const handlePlaylistFavourite = (track) => {
+    if (playlist.find((trackPlaylist) => trackPlaylist.id === track.id)) {
+      removeFromPlaylist(track);
+    } else {
+      addToPlaylist(track);
+    }
+  };
+
+  const playlistBackward = (currentTrack) => {
+    const index = playlist.findIndex(
+      (trackPlaylist) => trackPlaylist.id === currentTrack.id
+    );
+    return index > 0 ? playlist[index - 1] : playlist[index];
+  };
+
+  const playlistForward = (currentTrack) => {
+    const index = playlist.findIndex(
+      (trackPlaylist) => trackPlaylist.id === currentTrack.id
+    );
+    return index < playlist.length - 1 ? playlist[index + 1] : playlist[index];
+  };
+
+  const handlePlaylistShuffle = () => {
+    if (!localStorage.getItem("originalPlaylist")) {
+      const playlistShuffled = playlist.sort(() => Math.random() - 0.5);
+      localStorage.setItem("originalPlaylist", JSON.stringify(playlist));
+      setPlaylist(playlistShuffled);
+      localStorage.setItem("playlist", JSON.stringify(playlistShuffled));
+    } else {
+      const originalPlaylist = JSON.parse(
+        localStorage.getItem("originalPlaylist")
+      );
+      setPlaylist(originalPlaylist);
+      localStorage.setItem("playlist", JSON.stringify(originalPlaylist));
+      localStorage.removeItem("originalPlaylist");
+    }
+  };
+
   return (
     <Router>
       <div>
@@ -68,13 +107,20 @@ function App() {
           <Route
             path="/musicplayer"
             element={
-              <PlaylistContext.Provider value={{ trackToPlay, playlist }}>
-                <DetailPage
-                  trackToPlay={trackToPlay}
-                  playlist={playlist}
-                  addToPlaylist={addToPlaylist}
-                  removeFromPlaylist={removeFromPlaylist}
-                />
+              <PlaylistContext.Provider
+                value={{
+                  trackToPlay,
+                  setTrackToPlay,
+                  playlist,
+                  handlePlaylistFavourite,
+                  addToPlaylist,
+                  removeFromPlaylist,
+                  playlistBackward,
+                  playlistForward,
+                  handlePlaylistShuffle,
+                }}
+              >
+                <DetailPage />
               </PlaylistContext.Provider>
             }
           />
