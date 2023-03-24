@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-function Test() {
+function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [isLoggedIn, setLoggedIn] = useState(false);
@@ -69,4 +69,4 @@ function Test() {
     );
 }
 
-export default Test;
+export default Login;
