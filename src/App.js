@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { fetchChartTracks } from "./api/index.js";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import LandingPage from "./pages/LandingPage";
 import CardsPage from "./pages/CardsPage";
 import DetailPage from "./pages/DetailPage";
+
+const PlaylistContext = createContext(null);
 
 function App() {
   const [trackToPlay, setTrackToPlay] = useState(false);
@@ -66,12 +68,14 @@ function App() {
           <Route
             path="/musicplayer"
             element={
-              <DetailPage
-                trackToPlay={trackToPlay}
-                playlist={playlist}
-                addToPlaylist={addToPlaylist}
-                removeFromPlaylist={removeFromPlaylist}
-              />
+              <PlaylistContext.Provider value={{ trackToPlay, playlist }}>
+                <DetailPage
+                  trackToPlay={trackToPlay}
+                  playlist={playlist}
+                  addToPlaylist={addToPlaylist}
+                  removeFromPlaylist={removeFromPlaylist}
+                />
+              </PlaylistContext.Provider>
             }
           />
         </Routes>
@@ -82,3 +86,4 @@ function App() {
 }
 
 export default App;
+export { PlaylistContext };
