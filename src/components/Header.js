@@ -7,10 +7,10 @@ import Navbar from "./Navbar";
 function Header() {
   return (
     <header className="bg-gray-800">
-      <nav className="navbar flex items-center justify-between flex-wrap bg-gray-700 p-0">
+      <nav className="navbar flex items-center justify-between flex-wrap bg-gray-600 p-2">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img
-                    className="hidden h-14 w-auto lg:block pl-4"
+                    className="hidden h-16 w-auto lg:block pl-4"
                     src={appLogo}
                     alt="Back2Life logo"
                   />

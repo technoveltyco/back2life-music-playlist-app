@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Player from "../components/Player.js";
 import Playlist from "../components/Playlist.js";
-import "./DetailPage.css";
 
 function DetailPage({ trackToPlay, playlist, addToPlaylist, removeFromPlaylist }) {
   const [song, setSong] = useState(trackToPlay);
@@ -24,16 +23,16 @@ function DetailPage({ trackToPlay, playlist, addToPlaylist, removeFromPlaylist }
   };
 
   return (
-    <main className="Page Details-page">
-      <h1>Details Page</h1>
+    <main className="h-fit Details-page flex flex-col md:flex-row">
+      
 
-      <div className="Left-content">
+      <div className="flex-1 bg-gray-200 Left-content">
+        {/* <h1>Details Page</h1> */}
         <Player song={song} reset={resetPlayer} handleFavourite={handleFavourite} />
       </div>
 
       {playlist && (
-        <div className="Right-content">
-          <aside className="w-auto pr-4">
+        <div className="flex bg-gray-200 Right-content">
             <div className="bg-white shadow rounded-lg p-4 hover:shadow-lg cursor-pointer">
               <h2 className="font-bold text-xl mb-2">Tracks</h2>
               <Playlist
@@ -41,7 +40,6 @@ function DetailPage({ trackToPlay, playlist, addToPlaylist, removeFromPlaylist }
                 handleTrack={(id) => handleTrack(id)}
               />
             </div>
-          </aside>
         </div>
       )}
     </main>

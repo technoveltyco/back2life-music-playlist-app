@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./Player.css";
 
 function Player({ song, reset, handleFavourite }) {
   const [audio, setAudio] = useState(null);
@@ -64,8 +63,7 @@ function Player({ song, reset, handleFavourite }) {
     <>
       {song && (
         <div className="Player-widget">
-          <div className="w-full">
-            <div className="h-2 bg-red-light"></div>
+          {/* <div className="w-full"> */}
             <div className="flex items-center justify-center h-screen bg-red-lightest">
               <div
                 className="bg-white shadow-lg rounded-lg"
@@ -80,7 +78,7 @@ function Player({ song, reset, handleFavourite }) {
                       srcSet={song.images.coverarthq}
                     />
                   </div>
-                  <div className="w-full p-8">
+                  <div className="w-full p-14">
                     <div className="flex justify-between">
                       <div>
                         <h3 className="Player-songtitle text-2xl text-grey-darkest font-medium">
@@ -145,14 +143,6 @@ function Player({ song, reset, handleFavourite }) {
                             d="M21 7.5V18M15 7.5V18M3 16.811V8.69c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 010 1.954l-7.108 4.061A1.125 1.125 0 013 16.811z"
                           />
                         </svg>
-                        {/* <svg
-                          className="w-8 h-8"
-                          fill="currentColor"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M5 4h3v12H5V4zm7 0h3v12h-3V4z" />
-                        </svg> */}
                       </div>
                       <div className="text-grey-darker">
                         <svg
@@ -195,7 +185,7 @@ function Player({ song, reset, handleFavourite }) {
                 </div>
               </div>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       )}
     </>
