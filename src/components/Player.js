@@ -1,19 +1,31 @@
 import { useEffect, useState, useContext } from "react";
+import { useToggle } from "@reactuses/core";
 import { PlaylistContext } from "../App";
 
-function Player({ song, reset, handleFavourite }) {
+function Player({ reset }) {
+  const { trackToPlay, setTrackToPlay } = useContext(PlaylistContext);
+  const { playlist } = useContext(PlaylistContext);
+  const { playlistBackward, playlistForward } = useContext(PlaylistContext);
+  const { handlePlaylistFavourite } = useContext(PlaylistContext);
+  const { handlePlaylistShuffle } = useContext(PlaylistContext);
+
   const [audio, setAudio] = useState(null);
   const [playing, setPlaying] = useState(false);
   const [currentTimer, setCurrentTimer] = useState(convertSecondsToTime(0));
   const [totalTimer, setTotalTimer] = useState(convertSecondsToTime(0));
 
-  const { trackToPlay } = useContext(PlaylistContext);
-  if (!song) {
-    song = trackToPlay;
-  }
+  const [onFavourite, toggleFavourite] = useToggle(
+    playlist.find((track) => track.id === trackToPlay.id) !== undefined
+  );
+  const [onShuffle, toggleShuffle] = useToggle(
+    localStorage.getItem("originalPlaylist") !== null
+  );
+  const [onLoop, toggleLoop] = useToggle(
+    localStorage.getItem("playlistLoop") || false
+  );
 
   useEffect(() => {
-    if (!song) {
+    if (!trackToPlay) {
       return;
     }
 
@@ -21,8 +33,11 @@ function Player({ song, reset, handleFavourite }) {
       resetPlayer();
     }
 
+    toggleFavourite(
+      playlist.find((track) => track.id === trackToPlay.id) !== undefined
+    );
     // Audio and JavaScript handler for timig.
-    const audioElement = new Audio(song.uriplayer);
+    const audioElement = new Audio(trackToPlay.uriplayer);
     audioElement.addEventListener("loadeddata", () => {
       setTotalTimer(convertSecondsToTime(audioElement.duration));
     });
@@ -35,7 +50,7 @@ function Player({ song, reset, handleFavourite }) {
     });
 
     setAudio(audioElement);
-  }, [song, reset]);
+  }, [trackToPlay, reset]);
 
   function resetPlayer() {
     if (playing) {
@@ -51,6 +66,10 @@ function Player({ song, reset, handleFavourite }) {
     setTotalTimer(convertSecondsToTime(0));
   }
 
+  function convertSecondsToTime(seconds) {
+    return new Date(seconds * 1000).toISOString().substring(11, 19);
+  }
+
   // Event handlers.
   function handlePlay() {
     if (playing) {
@@ -61,15 +80,12 @@ function Player({ song, reset, handleFavourite }) {
     setPlaying(!playing);
   }
 
-  function convertSecondsToTime(seconds) {
-    return new Date(seconds * 1000).toISOString().substring(11, 19);
-  }
+  const song = trackToPlay;
 
   return (
     <>
       {song && (
         <div className="Player-widget">
-          {/* <div className="w-full"> */}
           <div className="flex items-center justify-center h-screen bg-red-lightest">
             <div
               className="bg-white shadow-lg rounded-lg"
@@ -87,21 +103,24 @@ function Player({ song, reset, handleFavourite }) {
                 <div className="w-full p-14">
                   <div className="flex justify-between">
                     <div>
-                      <h3 className="Player-songtitle text-2xl text-grey-darkest font-medium">
+                      <h3 className="Player-songtitle text-2xl text-grey-darkest font-medium text-gray-800">
                         {song.title}
                       </h3>
-                      <p className="Player-songsubtitle text-sm text-grey mt-1">
+                      <p className="Player-songsubtitle text-sm text-grey mt-1 text-gray-800">
                         {song.subtitle}
                       </p>
                     </div>
                     <div
                       id="Favourite-btn"
                       className="Favourite text-red-lighter"
-                      onClick={() => handleFavourite(song)}
+                      onClick={() => {
+                        toggleFavourite(!onFavourite);
+                        handlePlaylistFavourite(song);
+                      }}
                     >
                       <svg
                         className="w-6 h-6"
-                        fill="currentColor"
+                        fill={onFavourite ? "red" : "currentColor"}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
@@ -110,20 +129,35 @@ function Player({ song, reset, handleFavourite }) {
                     </div>
                   </div>
                   <div className="flex justify-between items-center mt-8">
-                    <div className="text-grey-darker">
+                    <div
+                      id="ShuffleHandlerBtn"
+                      className="text-grey-darker"
+                      onClick={() => {
+                        toggleShuffle(!onShuffle);
+                        handlePlaylistShuffle();
+                      }}
+                    >
                       <svg
                         className="w-8 h-8"
-                        fill="currentColor"
+                        fill={onShuffle ? "black" : "currentColor"}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
                         <path d="M6.59 12.83L4.4 15c-.58.58-1.59 1-2.4 1H0v-2h2c.29 0 .8-.2 1-.41l2.17-2.18 1.42 1.42zM16 4V1l4 4-4 4V6h-2c-.29 0-.8.2-1 .41l-2.17 2.18L9.4 7.17 11.6 5c.58-.58 1.59-1 2.41-1h2zm0 10v-3l4 4-4 4v-3h-2c-.82 0-1.83-.42-2.41-1l-8.6-8.59C2.8 6.21 2.3 6 2 6H0V4h2c.82 0 1.83.42 2.41 1l8.6 8.59c.2.2.7.41.99.41h2z" />
                       </svg>
                     </div>
-                    <div className="text-grey-darker">
+                    <div
+                      id="BackwardHandlerBtn"
+                      className="text-grey-darker"
+                      onClick={() => {
+                        const previousSong = playlistBackward(song);
+                        resetPlayer();
+                        setTrackToPlay(previousSong);
+                      }}
+                    >
                       <svg
                         className="w-8 h-8"
-                        fill="currentColor"
+                        fill="black"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
@@ -140,7 +174,7 @@ function Player({ song, reset, handleFavourite }) {
                         fill="none"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
-                        stroke="currentColor"
+                        stroke="black"
                         className="w-10 h-10"
                       >
                         <path
@@ -150,10 +184,18 @@ function Player({ song, reset, handleFavourite }) {
                         />
                       </svg>
                     </div>
-                    <div className="text-grey-darker">
+                    <div
+                      id="ForwardHandlerBtn"
+                      className="text-grey-darker"
+                      onClick={() => {
+                        const nextSong = playlistForward(song);
+                        resetPlayer();
+                        setTrackToPlay(nextSong);
+                      }}
+                    >
                       <svg
                         className="w-8 h-8"
-                        fill="currentColor"
+                        fill="black"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                       >
@@ -162,10 +204,15 @@ function Player({ song, reset, handleFavourite }) {
                     </div>
                     <div className="text-grey-darker">
                       <svg
+                        id="LoopHandlerBtn"
                         className="w-8 h-8"
-                        fill="currentColor"
+                        fill={onLoop ? "black" : "currentColor"}
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
+                        onClick={() => {
+                          toggleLoop(!onLoop);
+                          localStorage.setItem("playlistLoop", !onLoop);
+                        }}
                       >
                         <path d="M5 4a2 2 0 0 0-2 2v6H0l4 4 4-4H5V6h7l2-2H5zm10 4h-3l4-4 4 4h-3v6a2 2 0 0 1-2 2H6l2-2h7V8z" />
                       </svg>

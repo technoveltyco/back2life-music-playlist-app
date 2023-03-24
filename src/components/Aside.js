@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTopTenTracks } from "../api/index.js";
 
-
 function Aside({
   playlist,
   setPlaylist,
@@ -35,6 +34,7 @@ function Aside({
             topTen.map((track) => {
               return (
                 <Link
+                  key={track.id}
                   to="/musicplayer"
                   className="flex justify-between hover:bg-red-100"
                   onClick={() => handleGoToPlaylist(track)}
@@ -102,6 +102,7 @@ function Aside({
                 />
               </g>
             </svg>
+            &nbsp;
           </span>
           My Playlist
         </h2>
@@ -141,7 +142,7 @@ function Aside({
                         id="delete-playlist-2"
                         data-name="Line Color"
                         xmlns="http://www.w3.org/2000/svg"
-                        class="icon line-color"
+                        className="icon line-color"
                       >
                         <path
                           id="secondary"
