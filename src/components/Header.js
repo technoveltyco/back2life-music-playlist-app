@@ -2,31 +2,24 @@ import appLogo from "../../src/images/logo_bigger.png";
 import React from 'react';
 import 'tailwindcss/tailwind.css';
 import Navbar from "./Navbar";
+import Login from "./Login";
 
 
 function Header() {
   return (
     <header className="bg-gray-800">
-      <nav className="navbar flex items-center justify-between flex-wrap bg-gray-600 p-2">
+      <nav className="navbar flex items-center justify-between flex-nowrap bg-gray-600 p-2">
         <div className="flex items-center flex-shrink-0 text-white mr-6">
           <img
                     className="hidden h-16 w-auto lg:block pl-4"
                     src={appLogo}
                     alt="Back2Life logo"
                   />
-          <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-            <div className="text-sm lg:flex-grow">
+          <div className="w-1/2 md:w-full  block flex-grow md:flex md:items-center md:w-auto">
+            <div className="text-sm flex flex-col md:flex-row">
               <Navbar />
             </div>
-            <div className="mt-4 lg:mt-0">
-              <input className="rounded-full py-2 px-2 bg-gray-500 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
-            </div>
-            <div className="mt-4 lg:mt-0 ml-4">
-              <input className="rounded-full py-2 px-2 bg-gray-500 text-gray-100 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Password" />
-            </div>
-            <a href="#responsive-header" className="block mt-4 pl-4 lg:inline-block lg:mt-0 text-gray-200 hover:text-white ml-auto">
-              Login
-            </a>
+            <Login/>
           </div>
         </div>
         <div className="block lg:hidden">
