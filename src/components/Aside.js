@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchTopTenTracks } from "../api/index.js";
 
+
 function Aside({
   playlist,
   setPlaylist,
@@ -42,7 +43,7 @@ function Aside({
                     {`${track.title} - ${track.subtitle}`}
                   </span>
                   <button
-                    className="add-btn hover:bg-blue-100 text-red font-sm rounded"
+                    className="add-btn hover:bg-gray-400 text-black font-sm rounded"
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();

@@ -29,7 +29,7 @@ function CardsPage({
   };
 
   return (
-    <div>
+    <div className="main-page bg-gray-200">
       <div className="container mx-auto">
         <SearchBar setSongs={setHits} />
       </div>
@@ -49,21 +49,21 @@ function CardsPage({
               cards.map((item) => (
                 <div
                   key={item.id}
-                  className="w-full rounded-lg shadow hover:shadow-xl lg:max-w-sm"
+                  className="w-full rounded-lg shadow-xl hover:shadow-2xl lg:max-w-sm"
                 >
                   <img
                     className="object-cover w-full h-48"
                     src={item.albumImage}
                     alt="cover album"
                   />
-                  <div className="p-4">
-                    <h4 className="text-xl font-semibold text-blue-600">
+                  <div className="p-2">
+                    <h4 className="text-lg font-semibold text-gray-900">
                       {item.title} - {item.artist}
                     </h4>
                     <p className="mb-2 leading-normal">{item.genre}</p>
                     <Link to="/musicplayer">
                       <button
-                        className="px-6 py-2 text-sm text-white bg-red-400 rounded shadow"
+                        className="playbtn px-4 py-2 text-sm text-white bg-red-400 rounded shadow"
                         onClick={() => handlePlaySong(item.hit)}
                       >
                         <svg
