@@ -129,12 +129,15 @@ so I can create personalised playlists and group them into categories.
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Create login input
+- [ ] UX/UI Improvements
+  - [ ] Responsiveness fixes
+- [ ] User profile feature
+- [ ] Social media sharing
+- [ ] Purchase songs at App Stores
+- [ ] Automated testing by features
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [request feature](https://github.com/users/technoveltyco/projects/8) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -155,8 +158,6 @@ Don't forget to give the project a star! Thanks again!
 5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- LICENSE -->
 ## License
